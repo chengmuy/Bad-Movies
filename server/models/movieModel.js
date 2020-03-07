@@ -4,9 +4,9 @@
 const { db, Movie } = require("../../db/mongodb");
 
 module.exports = {
-  addMovie: movieObj => {
-    return Movie.findOneAndUpdate({ id: movieObj.id }, movieObj, { upsert: true, new: true });
-  }
+  addMovie: movieObj => Movie.findOneAndUpdate({ id: movieObj.id }, movieObj, { upsert: true, new: true }),
+
+  deleteMovie: ({ id }) => Movie.deleteOne({ id })
 };
 
 // module.exports
@@ -18,3 +18,5 @@ module.exports = {
 //     vote_average: 2.2
 //   })
 //   .then(res => console.log(res));
+
+// module.exports.deleteMovie({ id: 101 }).then(res => console.log(res));
