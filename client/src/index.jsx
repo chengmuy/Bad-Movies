@@ -68,6 +68,7 @@ class App extends React.Component {
     };
 
     // you might have to do something important here!
+    this.updateFavorites = this.updateFavorites.bind(this);
     this.updateMovies = this.updateMovies.bind(this);
     this.swapFavorites = this.swapFavorites.bind(this);
   }
@@ -76,8 +77,12 @@ class App extends React.Component {
     this.setState({ movies: movieList });
   }
 
+  updateFavorites(favoriteList) {
+    this.setState({ favorites: favoriteList });
+  }
+
   componentDidMount() {
-    // this.getMovies();
+    this.getFavorites().then(this.updateFavorites);
   }
 
   getMovies(id) {
@@ -86,7 +91,14 @@ class App extends React.Component {
       url: "/movies/search",
       params: { id: id }
     };
-    return axios(config);
+    return axios(config).then(resp => resp.data.results);
+  }
+
+  getFavorites() {
+    const config = {
+      url: "/movies/favorites"
+    };
+    return axios(config).then(resp => resp.data.favorites);
   }
 
   saveMovie() {

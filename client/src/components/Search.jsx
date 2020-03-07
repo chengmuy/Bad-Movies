@@ -27,12 +27,12 @@ class Search extends React.Component {
       .then(genres => this.setState({ genres }))
       .then(() => this.setState({ value: this.state.genres[0].id }))
       .then(() => this.props.getMovies(this.state.value))
-      .then(res => this.props.updateMovies(res.data.results));
+      .then(this.props.updateMovies);
   }
 
   handleSearch() {
     console.log("handling search");
-    this.props.getMovies(this.state.value).then(res => this.props.updateMovies(res.data.results));
+    this.props.getMovies(this.state.value).then(this.props.updateMovies);
   }
 
   render() {
