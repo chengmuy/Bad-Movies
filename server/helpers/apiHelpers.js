@@ -4,14 +4,26 @@ const { API_KEY } = require("../../config.js");
 
 const TMDB_URL = "https://api.themoviedb.org/3";
 
-// write out logic/functions required to query TheMovieDB.org
 module.exports.getGenres = () => {
-  let config = { params: { api_key: API_KEY } };
+  let config = {
+    url: "genre/movie/list",
+    baseURL: TMDB_URL,
+    params: { api_key: API_KEY }
+  };
   return axios.get(TMDB_URL + "/genre/movie/list", config).then(({ data }) => data);
 };
 
-// FOR REFERENCE:
-// https://www.themoviedb.org/account/signup
-// https://developers.themoviedb.org/3/discover/movie-discover
-// Get your API Key and save it in your config file
-// Don't forget to export your functions and require them within your server file
+module.exports.getSearch = ({ id }) => {
+  let config = {
+    method: "GET",
+    url: "/discover/movie",
+    baseURL: TMDB_URL,
+    params: {
+      api_key: API_KEY,
+      sort_by: "vote_average.asc",
+      include_adult: true,
+      with_genres: id
+    }
+  };
+  return axios(config).then(({ data }) => data);
+};
