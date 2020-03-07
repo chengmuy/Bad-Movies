@@ -27,7 +27,7 @@ module.exports = {
   saveMovie: (req, res) => {
     movieModel
       .addMovie(req.body)
-      .then(() => res.sendStatus(201))
+      .then(dbRes => res.status(201).json(dbRes))
       .catch(err => {
         console.error(err);
         res.sendStatus(500);
