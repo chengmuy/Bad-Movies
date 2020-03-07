@@ -1,6 +1,6 @@
-const request = require("request");
 const axios = require("axios");
-const { API_KEY } = require("../../config.js");
+const API_KEY = process.env.TMDB_API_KEY || require("../../config.js").API_KEY;
+// const { API_KEY } = require("../../config.js");
 
 const TMDB_URL = "https://api.themoviedb.org/3";
 

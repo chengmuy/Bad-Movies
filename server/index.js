@@ -1,3 +1,5 @@
+const PORT = process.env.PORT || 3000;
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
@@ -31,6 +33,6 @@ const movieRoutes = require("./routes/movieRoutes.js");
 // Use routes
 app.use("/movies", movieRoutes);
 
-app.listen(3000, function() {
-  console.log("listening on port 3000!");
+app.listen(PORT, function() {
+  console.log(`listening on port ${PORT}!`);
 });
