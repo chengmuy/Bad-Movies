@@ -25,10 +25,10 @@ Use the routes below to build your application:
 
 */
 
-//Routes
+// Routes
 const movieRoutes = require("./routes/movieRoutes.js");
 
-//Use routes
+// Use routes
 app.use("/movies", movieRoutes);
 
 app.listen(3000, function() {
