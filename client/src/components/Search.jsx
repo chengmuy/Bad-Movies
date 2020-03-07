@@ -8,6 +8,8 @@ class Search extends React.Component {
       genres: [],
       value: ""
     };
+
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   getGenres() {
@@ -26,6 +28,11 @@ class Search extends React.Component {
       .then(() => this.setState({ value: this.state.genres[0].id }))
       .then(() => this.props.getMovies(this.state.value))
       .then(res => this.props.updateMovies(res.data.results));
+  }
+
+  handleSearch() {
+    console.log("handling search");
+    this.props.getMovies(this.state.value).then(res => this.props.updateMovies(res.data.results));
   }
 
   render() {
@@ -51,7 +58,7 @@ class Search extends React.Component {
         <br />
         <br />
 
-        <button>Search</button>
+        <button onClick={this.handleSearch}>Search</button>
       </div>
     );
   }

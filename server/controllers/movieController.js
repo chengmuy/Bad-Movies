@@ -14,8 +14,9 @@ module.exports = {
   },
 
   getSearch: (req, res) => {
+    console.log("Controller.getSearch req.query.id >> ", req.query.id);
     tmdbApi
-      .getSearch(req.query.id)
+      .getSearch(req.query)
       .then(data => res.json(data))
       .catch(err => {
         console.error(err);
