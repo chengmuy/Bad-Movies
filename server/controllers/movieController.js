@@ -43,5 +43,9 @@ module.exports = {
         console.error(err);
         res.sendStatus(500);
       });
+  },
+
+  getFavorites: (req, res) => {
+    movieModel.getAllMovies().then(dbRes => res.status(200).json({ favorites: dbRes }));
   }
 };

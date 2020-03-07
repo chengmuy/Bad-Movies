@@ -6,7 +6,9 @@ const { db, Movie } = require("../../db/mongodb");
 module.exports = {
   addMovie: movieObj => Movie.findOneAndUpdate({ id: movieObj.id }, movieObj, { upsert: true, new: true }).exec(),
 
-  deleteMovie: ({ id }) => Movie.deleteOne({ id }).exec()
+  deleteMovie: ({ id }) => Movie.deleteOne({ id }).exec(),
+
+  getAllMovies: () => Movie.find({}).exec()
 };
 
 // module.exports
