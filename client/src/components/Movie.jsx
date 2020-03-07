@@ -2,7 +2,7 @@ import React from "react";
 
 const Movie = ({ poster_path, title, release_date, vote_average }) => (
   <li className="movie_item">
-    <img src={`https://image.tmdb.org/t/p/w342${poster_path}`} />
+    {poster_path && <img src={`https://image.tmdb.org/t/p/w342${poster_path}`} />}
     <div className="movie_description">
       <h2>{title}</h2>
       <section className="movie_details">
