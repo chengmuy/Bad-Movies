@@ -29,8 +29,6 @@ Use the routes below to build your application:
 
 */
 
-//TODO: Pick one of the two route options below:
-//OPTION 1: Use regular routes, where endpoints are pre-defined on this page, you do NOT need to refer to /server/routes/movieRoutes.js file
 //OPTION 2: Use Express Router, where the routes are defined under /server/routes/movieRoutes.js file
 
 //***********************************************************************************************************************
