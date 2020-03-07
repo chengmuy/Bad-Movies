@@ -25,8 +25,16 @@ module.exports = {
   },
 
   saveMovie: (req, res) => {
+    console.log("saveMovie >> ", req.body);
+
+    if (!(req.body.id && req.body.title)) {
+      res.sendStatus(400);
+      return;
+    }
+
     movieModel
       .addMovie(req.body)
+      .tap(dbRes => console.log(dbRes))
       .then(dbRes => res.status(201).json(dbRes))
       .catch(err => {
         console.error(err);

@@ -11,59 +11,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       movies: [],
-      favorites: [
-        {
-          popularity: 2.702,
-          vote_count: 2,
-          video: false,
-          poster_path: "/oAWXjjGTrkrdAlSeGGq0IZOwFoF.jpg",
-          id: 448503,
-          adult: false,
-          backdrop_path: "/g1btrWDoWMOl41axD9M2YgpZdve.jpg",
-          original_language: "mr",
-          original_title: "उन्मत्त",
-          genre_ids: [28, 27, 878, 53],
-          title: "FAVORITE Unmatta",
-          vote_average: 0,
-          overview:
-            "“Unmatta” is an upcoming Marathi sci-fi action thriller produced by “24FS Chitra”. It is a story of five students who invent a new kind of hallucination drug and experiment with it. It has twisted story-line with lot of action and special effects.",
-          release_date: "2019-02-22"
-        },
-        {
-          popularity: 0.6,
-          id: 344490,
-          video: false,
-          vote_count: 2,
-          vote_average: 0,
-          title: "FAVORITE Webcam",
-          release_date: "2012-07-27",
-          original_language: "en",
-          original_title: "Webcam",
-          genre_ids: [53, 27],
-          backdrop_path: null,
-          adult: false,
-          overview:
-            '"Webcam" is based on actual events and was shot entirely on a computer\'s webcam. The filmmakers hope that it will make people think more about the technology that we use every day and the effects it can have on all of us.',
-          poster_path: "/oAWXjjGTrkrdAlSeGGq0IZOwFoF.jpg"
-        },
-        {
-          popularity: 1.175,
-          id: 331827,
-          video: false,
-          vote_count: 2,
-          vote_average: 0,
-          title: "FAVORITE Rouge Fougère",
-          release_date: "2015-06-05",
-          original_language: "en",
-          original_title: "Rouge Fougère",
-          genre_ids: [27, 10402, 878],
-          backdrop_path: null,
-          adult: false,
-          overview:
-            "A group of survivors is looking for medicine in a toxic world. Addicted, mankind fells down in its darkest hour. As the team's reserves are dwindling, a new threat appears. Will survivors cope one last time?",
-          poster_path: "/oAWXjjGTrkrdAlSeGGq0IZOwFoF.jpg"
-        }
-      ],
+      favorites: [],
       showFaves: false
     };
 
@@ -71,6 +19,7 @@ class App extends React.Component {
     this.updateFavorites = this.updateFavorites.bind(this);
     this.updateMovies = this.updateMovies.bind(this);
     this.swapFavorites = this.swapFavorites.bind(this);
+    this.saveMovie = this.saveMovie.bind(this);
   }
 
   updateMovies(movieList) {
@@ -101,8 +50,20 @@ class App extends React.Component {
     return axios(config).then(resp => resp.data.favorites);
   }
 
-  saveMovie() {
+  saveMovie(movie) {
     // same as above but do something diff
+    let config = {
+      method: "POST",
+      url: "/movies/save",
+      data: movie
+    };
+
+    console.log("saveMovie movie >> ", movie);
+
+    // axios(config).then(({ data: movieObj }) => this.updateFavorites([...this.state.favorites, movieObj]));
+    return axios(config)
+      .then(this.getFavorites)
+      .then(this.updateFavorites);
   }
 
   deleteMovie() {
@@ -133,6 +94,7 @@ class App extends React.Component {
           <Movies
             movies={this.state.showFaves ? this.state.favorites : this.state.movies}
             showFaves={this.state.showFaves}
+            saveMovie={this.saveMovie}
           />
         </div>
       </div>

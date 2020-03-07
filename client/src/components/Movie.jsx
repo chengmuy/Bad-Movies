@@ -1,7 +1,7 @@
 import React from "react";
 
-const Movie = ({ poster_path, title, release_date, vote_average }) => (
-  <li className="movie_item">
+const Movie = ({ poster_path, title, release_date, vote_average, saveMovie }) => (
+  <li className="movie_item" onClick={saveMovie}>
     {poster_path && <img src={`https://image.tmdb.org/t/p/w342${poster_path}`} />}
     <div className="movie_description">
       <h2>{title}</h2>
