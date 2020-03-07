@@ -20,6 +20,7 @@ class App extends React.Component {
     this.updateMovies = this.updateMovies.bind(this);
     this.swapFavorites = this.swapFavorites.bind(this);
     this.saveMovie = this.saveMovie.bind(this);
+    this.deleteMovie = this.deleteMovie.bind(this);
   }
 
   updateMovies(movieList) {
@@ -66,8 +67,16 @@ class App extends React.Component {
       .then(this.updateFavorites);
   }
 
-  deleteMovie() {
+  deleteMovie(id) {
     // same as above but do something diff
+    let config = {
+      method: "DELETE",
+      url: "/movies/delete",
+      params: { id }
+    };
+    return axios(config)
+      .then(this.getFavorites)
+      .then(this.updateFavorites);
   }
 
   swapFavorites() {
@@ -95,6 +104,7 @@ class App extends React.Component {
             movies={this.state.showFaves ? this.state.favorites : this.state.movies}
             showFaves={this.state.showFaves}
             saveMovie={this.saveMovie}
+            deleteMovie={this.deleteMovie}
           />
         </div>
       </div>
