@@ -12,6 +12,7 @@ module.exports = {
         res.sendStatus(500);
       });
   },
+
   getSearch: (req, res) => {
     tmdbApi
       .getSearch(req.query.id)
@@ -23,9 +24,23 @@ module.exports = {
   },
 
   saveMovie: (req, res) => {
-    //save movie as favorite into the database
+    movieModel
+      .addMovie(req.body)
+      .then(() => res.sendStatus(201))
+      .catch(err => {
+        console.error(err);
+        res.sendStatus(500);
+      });
   },
+
   deleteMovie: (req, res) => {
-    //remove movie from favorites into the database
+    movieModel
+      .deleteMovie(req.query)
+      // .tap(res => console.log(res))
+      .then(({ n }) => (n === 1 ? res.sendStatus(202) : res.sendStatus(200)))
+      .catch(err => {
+        console.error(err);
+        res.sendStatus(500);
+      });
   }
 };
