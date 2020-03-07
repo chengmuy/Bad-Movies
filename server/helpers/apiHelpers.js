@@ -22,7 +22,8 @@ module.exports.getSearch = ({ id }) => {
       api_key: API_KEY,
       sort_by: "vote_average.asc",
       include_adult: true,
-      with_genres: id
+      with_genres: id,
+      "vote_count.gte": 15
     }
   };
   return axios(config).then(({ data }) => data);
