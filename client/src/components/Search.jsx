@@ -23,7 +23,9 @@ class Search extends React.Component {
   componentDidMount() {
     this.getGenres()
       .then(genres => this.setState({ genres }))
-      .then(() => this.setState({ value: this.state.genres[0].id }));
+      .then(() => this.setState({ value: this.state.genres[0].id }))
+      .then(() => this.props.getMovies(this.state.value))
+      .then(res => this.props.updateMovies(res.data.results));
   }
 
   render() {
